@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+   /* Style the page container */
+   body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: linear-gradient(to right, #fc5c7d, #6a82fb);
+    }
+    
+    /* Style the logo */
+    img.logo {
+      margin: 0 0 20px 0;
+      width: 150px;
+    }
+    
+    /* Style the heading and paragraph */
+    h1, p {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: white;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+    
+      /* Style the generate button */
+      button {
+      display: block;
+      margin: 0 auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #6ab3fc;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+    }
+    
+    /* Style the meal image and name */
+    img, p {
+      margin: 20px 0;
+    }
+    
+    /* Style the meal name */
+    p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- <img class="logo" src="logo.png" alt="Flicks Food Generator"> -->
+  <h1>Food Generator</h1>
+  <p>Click the button to see a random meal suggestion!</p>
+  <button onclick="location.reload()">Generate Meal</button>
+  <br>
+  <br>
+  <img id="mealImage" src="" alt="Meal picture">
+  <p id="mealName"></p>
+  
+  <script>
+    // Make a request to the food API to get a list of meal options
+    fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+      .then(response => response.json())
+      .then(data => {
+        // Use the response data to update the page with the meal options
+        const meal = data.meals[0];
+        document.getElementById("mealImage").src = meal.strMealThumb;
+        document.getElementById("mealImage").alt = meal.strMeal;
+        document.getElementById("mealName").innerHTML = meal.strMeal;
+      });
+  </script>
+</body>
+</html>
